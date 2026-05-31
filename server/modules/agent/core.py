@@ -1,5 +1,6 @@
 import os
 import logging
+from datetime import datetime
 from typing import AsyncGenerator
 
 import anthropic
@@ -15,7 +16,14 @@ logger = logging.getLogger(__name__)
 _client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 MODEL = os.getenv("AGENT_MODEL", "claude-sonnet-4-6")
 MAX_TOKENS = 1024
-SYSTEM_PROMPT = "You are a helpful personal voice assistant. Be concise — your responses will be spoken aloud."
+
+
+def _system_prompt() -> str:
+    now = datetime.now().strftime("%A, %B %d, %Y %I:%M %p")
+    return (
+        "You are a helpful personal voice assistant. Be concise — your responses will be spoken aloud. "
+        f"The current date and time is {now}."
+    )
 
 
 async def run(message: str, history: ConversationHistory) -> AsyncGenerator[str, None]:
@@ -25,7 +33,7 @@ async def run(message: str, history: ConversationHistory) -> AsyncGenerator[str,
         response = _client.messages.create(
             model=MODEL,
             max_tokens=MAX_TOKENS,
-            system=SYSTEM_PROMPT,
+            system=_system_prompt(),
             tools=TOOLS,
             messages=history.get(),
         )

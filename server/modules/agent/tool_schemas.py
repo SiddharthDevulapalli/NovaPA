@@ -23,7 +23,7 @@ TOOLS = [
     },
     {
         "name": "play_youtube",
-        "description": "Search YouTube and play the top result.",
+        "description": "Opens YouTube on browser, searches youtube and play the top result.",
         "input_schema": {
             "type": "object",
             "properties": {

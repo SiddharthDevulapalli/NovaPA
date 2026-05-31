@@ -21,9 +21,12 @@ async def ask(message: str) -> None:
 
 
 async def main() -> None:
-    await ask("What is the capital of Japan?")
-    await ask("Search the web for the latest Python version.")
-    await ask("Turn on my bedroom light.")
+    # await ask("What is the capital of Japan?")
+    # await ask("Search the web for the latest Python version.")
+    # await ask("Turn on my bedroom light.")
+    # await ask("Open youtube and play Billie Jean - Michael Jackson.")
+    await ask("Open the browser and search for Chase bank website.")
+    # await ask("Set a reminder to finish my painting at 2:52pm today.")
 
 
 asyncio.run(main())

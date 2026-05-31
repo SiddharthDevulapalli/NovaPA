@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def set_reminder(text: str, dt: datetime) -> str:
-    date_str = dt.strftime("%B %d, %Y %H:%M:%S")
+    date_str = dt.strftime("%B %d, %Y %I:%M:%S %p")
     script = f'''
     tell application "Reminders"
         set myList to first list
