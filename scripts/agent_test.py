@@ -25,7 +25,7 @@ async def main() -> None:
     # await ask("Search the web for the latest Python version.")
     # await ask("Turn on my bedroom light.")
     # await ask("Open youtube and play Billie Jean - Michael Jackson.")
-    await ask("Open the browser and search for Chase bank website.")
+    await ask("Open the browser and search for flights to India.")
     # await ask("Set a reminder to finish my painting at 2:52pm today.")
 
 

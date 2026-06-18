@@ -1,0 +1,53 @@
+# Environment & credentials
+.env
+.env.*
+*.env
+config.json
+config.local.json
+secrets.json
+credentials.json
+agent/config.json
+
+# Virtual environment
+venv/
+.venv/
+paenv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ChromaDB
+chroma_db/
+
+# Wake word model
+wake_word_model/
+*.onnx
+
+# React build output
+server/static/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Audio recordings
+audio_files/*
+!audio_files/.gitkeep
+
+# Logs
+*.log
+
+# Test audio in scripts
+scripts/*.wav
+
+# Others
+memory/
+CLAUDE.md
+

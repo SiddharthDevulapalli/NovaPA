@@ -14,6 +14,7 @@ from server.modules.web_search.searcher import search
 from agent.modules.browser.opener import open_url
 from agent.modules.browser.youtube import play_youtube
 from agent.modules.mac_actions.reminders import set_reminder
+from agent.modules.lights.kasa_controller import control as kasa_control
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +71,5 @@ async def _set_reminder(args: SetReminderInput) -> str:
 
 
 async def _control_light(args: ControlLightInput) -> str:
-    logger.info("control_light stub: %s %s %s", args.device_name, args.action, args.value)
-    suffix = f" to {args.value}%" if args.value is not None else ""
-    return f"[stub] Light '{args.device_name}': {args.action.value}{suffix}"
+    logger.info("control_light: %s %s %s", args.device_name, args.action, args.value)
+    return await kasa_control(args.device_name, args.action.value, args.value)
