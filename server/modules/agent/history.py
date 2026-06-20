@@ -1,4 +1,10 @@
+import os
 from typing import Any
+from dotenv import load_dotenv
+
+load_dotenv()
+
+MAX_HISTORY_TURNS = int(os.getenv("MAX_HISTORY_TURNS", "20"))
 
 
 class ConversationHistory:
@@ -7,6 +13,12 @@ class ConversationHistory:
 
     def add_user(self, content: str) -> None:
         self._messages.append({"role": "user", "content": content})
+        self._trim()
+
+    def _trim(self) -> None:
+        max_messages = MAX_HISTORY_TURNS * 2
+        if len(self._messages) > max_messages:
+            self._messages = self._messages[-max_messages:]
 
     def add_assistant(self, content: Any) -> None:
         self._messages.append({"role": "assistant", "content": content})

@@ -2,7 +2,7 @@ import logging
 import numpy as np
 from typing import Callable
 from openwakeword.model import Model
-from .config import WAKE_WORD_THRESHOLD, PRETRAINED_MODEL, AUDIO_CHUNK
+from .config import WAKE_WORD_THRESHOLD, PRETRAINED_MODEL, AUDIO_CHUNK, SAMPLE_RATE
 from .audio_stream import open_stream, close_stream
 
 logger = logging.getLogger(__name__)
@@ -24,6 +24,10 @@ def on_wake(callback: Callable[[], None]) -> None:
                 close_stream(pa, stream)
                 callback()
                 pa, stream = open_stream()
+                for _ in range(5):
+                    stream.read(AUDIO_CHUNK, exception_on_overflow=False)
+                model.reset()
+
     except KeyboardInterrupt:
         logger.info("Wake word detector stopped.")
     finally:

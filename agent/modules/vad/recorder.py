@@ -8,7 +8,7 @@ from .config import SILENCE_THRESHOLD, SILENCE_DURATION_MS, MAX_DURATION_S, MIN_
 logger = logging.getLogger(__name__)
 
 
-def record_utterance() -> bytes:
+def record_utterance(min_recording_s: float = MIN_RECORDING_S) -> bytes:
     pa = pyaudio.PyAudio()
     stream = pa.open(format=pyaudio.paInt16, channels=1, rate=SAMPLE_RATE, input=True, frames_per_buffer=CHUNK)
 
@@ -16,7 +16,7 @@ def record_utterance() -> bytes:
     silent_chunks = 0
     max_chunks = int(SAMPLE_RATE / CHUNK * MAX_DURATION_S)
     silence_chunks_needed = int((SILENCE_DURATION_MS / 1000) / (CHUNK / SAMPLE_RATE))
-    min_chunks = int(SAMPLE_RATE / CHUNK * MIN_RECORDING_S)
+    min_chunks = int(SAMPLE_RATE / CHUNK * min_recording_s)
 
     logger.info("Recording utterance...")
     for i in range(max_chunks):
